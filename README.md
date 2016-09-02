@@ -1,4 +1,4 @@
-# SamsungC100 firmware handmade
+# Samsung C100 firmware(handmade)
 let's try to bring up hardware on Samsung C100 phone
 
 Why? Just for fun! 
