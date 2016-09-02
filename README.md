@@ -7,7 +7,7 @@ I am firmware developer and I have old phone in my table and JTAG programmer on 
 
 
 About Hardware:  
-MCU: CX805-30
+MCU: CX805-30  
 Memory: LRS1828  
 RF: CX74017  
 PMU: CX20524-12  
