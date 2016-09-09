@@ -15,63 +15,75 @@ extern "C" {
 /* ----- Types -------------------------------------------------------------- */
 
 /**
-  * @brief  GPIO Bit SET and Bit RESET enumeration
-  */
+* @brief  GPIO Bit SET and Bit RESET enumeration
+*/
 typedef enum
 {
-  GPIO_PIN_RESET = 0,
-  GPIO_PIN_SET
+    GPIO_PIN_RESET = 0,
+    GPIO_PIN_SET
 }GPIO_PinState;
 
+/**
+* @brief  GPIO Port input mode enumeration
+*/
 typedef enum
 {
-  GPIO_PIN_INPUT = 0,
-  GPIO_PIN_OUTPUT
+    GPIO_PIN_INPUT = 0,
+    GPIO_PIN_OUTPUT
 }GPIO_PinMode;
 
 /**
-  * @brief  GPIO Port list
-  */
+* @brief  GPIO Port list enumeration
+*/
 typedef enum
 {
-  GPIOA = 0,
-  GPIOB,
-  GPIOC,
-  GPIOD,
-  GPIOE,
+    GPIOA = 0,
+    GPIOB,
+    GPIOC,
+    GPIOD,
+    GPIOE,
 }GPIO_Port;
 
+/**
+* @brief  GPIO DC control list mode apply for A-C ports
+*/
 typedef enum
 {
-  DRIVE_0_8MA = 0x00,
-  DRIVE_2_8MA = 0x01,
-  DRIVE_4_8MA = 0x02,
-  DRIVE_6_8MA = 0x03,
-  DRIVE_10_8MA = 0x04,
-  DRIVE_12_8MA = 0x05,
-  DRIVE_14_8MA = 0x06,
-  DRIVE_16_8MA = 0x07,
+    DRIVE_0_8MA = 0x00,
+    DRIVE_2_8MA = 0x01,
+    DRIVE_4_8MA = 0x02,
+    DRIVE_6_8MA = 0x03,
+    DRIVE_10_8MA = 0x04,
+    DRIVE_12_8MA = 0x05,
+    DRIVE_14_8MA = 0x06,
+    DRIVE_16_8MA = 0x07,
 }GPIO_ABCD_DriveControl;
 
+/**
+* @brief  GPIO DC control list mode (A-E)
+*/
 typedef enum
 {
-  DC_NO_PULL = 0x00,
-  DC_10UA_PULL_DOWN = 0x01,
-  DC_100UA_PULL_UP = 0x02,
-  DC_10UA_PULL_UP = 0x03,
+    DC_NO_PULL = 0x00,
+    DC_10UA_PULL_DOWN = 0x01,
+    DC_100UA_PULL_UP = 0x02,
+    DC_10UA_PULL_UP = 0x03,
 }GPIO_DC_Control;
 
+/**
+* @brief  GPIO DC control list mode apply for E port
+*/
 typedef enum
 {
-  DRIVE_E_0_8MA = 0x00,
-  DRIVE_E_4_8MA = 0x01,
-  DRIVE_E_10_8MA = 0x02,
-  DRIVE_E_14_8MA = 0x04,
+    DRIVE_E_0_8MA = 0x00,
+    DRIVE_E_4_8MA = 0x01,
+    DRIVE_E_10_8MA = 0x02,
+    DRIVE_E_14_8MA = 0x04,
 }GPIOE_DriveControl;
 
 /** @defgroup GPIO_pins_define GPIO pins define
-  * @{
-  */
+* @{
+*/
 #define GPIO_PIN_0                 ((uint16_t)0x0001)  /* Pin 0 selected    */
 #define GPIO_PIN_1                 ((uint16_t)0x0002)  /* Pin 1 selected    */
 #define GPIO_PIN_2                 ((uint16_t)0x0004)  /* Pin 2 selected    */
@@ -80,7 +92,9 @@ typedef enum
 #define GPIO_PIN_5                 ((uint16_t)0x0020)  /* Pin 5 selected    */
 #define GPIO_PIN_6                 ((uint16_t)0x0040)  /* Pin 6 selected    */
 #define GPIO_PIN_7                 ((uint16_t)0x0080)  /* Pin 7 selected    */
-
+/**
+* @}
+*/
 
 #define GPIO_GROUP10_G1_DRIVE_MASK  ((uint16_t)0x7000)
 #define GPIO_GROUP10_G0_DRIVE_MASK  ((uint16_t)0x0070)

@@ -12,6 +12,7 @@ extern "C" {
 
 /* ----- Includes ----------------------------------------------------------- */
 #include <stdint.h>
+#include <stddef.h>
 
 #include <cx805.h>
 
