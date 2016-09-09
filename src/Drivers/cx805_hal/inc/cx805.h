@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    cx805.h
+  * @author  Denis Krasutski (Krasutski.deni@gmail.com)
+  * @version V0.0.1
+  * @date    7-September-2016
+  * @brief   This file contains all data types for cx805 peripheral
+  ******************************************************************************
+  */
 #ifndef CX805_H
 #define CX805_H
 
@@ -44,74 +53,74 @@
 
 typedef struct
 {
-    __IO uint16_t CS0_CONFIG;   /*!< EBI CS0 configuration register */
-    __IO uint16_t CS1_CONFIG;   /*!< EBI CS1 configuration register */
-    __IO uint16_t CS2_CONFIG;   /*!< EBI CS2 configuration register */
-    __IO uint16_t CS3_CONFIG;   /*!< EBI CS3 configuration register */
-    __IO uint16_t CS4_CONFIG;   /*!< EBI CS4 configuration register */
-    __IO uint16_t AMBA_CTRL;    /*!< AMBA Control register */
-    __IO uint16_t AMBA_STAT;    /*!< AMBA Status register */
-    __IO uint16_t CACHE_CTRL;   /*!< Reserved. Cache Control in CX810 */
-    __IO uint16_t CS5_CONFIG;   /*!< EBI CS5 configuration register */
-    __IO uint16_t CS6_CONFIG;   /*!< EBI CS6 configuration register */
-    __IO uint16_t CS7_CONFIG;   /*!< EBI CS7 configuration register */
+    __IO uint16_t CS0_CONFIG;               /*!< EBI CS0 configuration register */
+    __IO uint16_t CS1_CONFIG;               /*!< EBI CS1 configuration register */
+    __IO uint16_t CS2_CONFIG;               /*!< EBI CS2 configuration register */
+    __IO uint16_t CS3_CONFIG;               /*!< EBI CS3 configuration register */
+    __IO uint16_t CS4_CONFIG;               /*!< EBI CS4 configuration register */
+    __IO uint16_t AMBA_CTRL;                /*!< AMBA Control register */
+    __IO uint16_t AMBA_STAT;                /*!< AMBA Status register */
+    __IO uint16_t CACHE_CTRL;               /*!< Reserved. Cache Control in CX810 */
+    __IO uint16_t CS5_CONFIG;               /*!< EBI CS5 configuration register */
+    __IO uint16_t CS6_CONFIG;               /*!< EBI CS6 configuration register */
+    __IO uint16_t CS7_CONFIG;               /*!< EBI CS7 configuration register */
 }AMBA__TypeDef;
 
 typedef struct
 {
-    __IO uint16_t Secods;               /*!< Value register */
-    __IO uint16_t Minutes;              /*!< Value register */
-    __IO uint16_t Hours;                /*!< Value register */
-    __IO uint16_t Days;                 /*!< Value register */
-    __IO uint16_t Mounths;              /*!< Value register */
-    __IO uint16_t Years;                /*!< Value register */
-    __IO uint16_t Control;              /*!< Control register */
-    __IO uint16_t Test;                 /*!< Test Mode Control register */
+    __IO uint16_t Secods;                   /*!< Value register */
+    __IO uint16_t Minutes;                  /*!< Value register */
+    __IO uint16_t Hours;                    /*!< Value register */
+    __IO uint16_t Days;                     /*!< Value register */
+    __IO uint16_t Mounths;                  /*!< Value register */
+    __IO uint16_t Years;                    /*!< Value register */
+    __IO uint16_t Control;                  /*!< Control register */
+    __IO uint16_t Test;                     /*!< Test Mode Control register */
     __IO uint16_t RESERVE1;
-    __IO uint16_t AlarmMinutes;         /*!< Alarm register */
-    __IO uint16_t AlarmHours;           /*!< Alarm register */
-    __IO uint16_t AlarmDays;            /*!< Alarm register */
-    __IO uint16_t AlarmMounths;         /*!< Alarm register */
-    __IO uint16_t AlarmYears;           /*!< Alarm register */
-    __IO uint16_t InterruptControl;     /*!< External Interrupt Enable */
-    __IO uint16_t StorageRegister0;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister1;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister2;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister3;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister4;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister5;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister6;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister7;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister8;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister9;     /*!< General Storage Register */
-    __IO uint16_t StorageRegister10;    /*!< General Storage Register */
-    __IO uint16_t StorageRegister11;    /*!< General Storage Register */
-    __IO uint16_t StorageRegister12;    /*!< General Storage Register */
-    __IO uint16_t StorageRegister13;    /*!< General Storage Register */
-    __IO uint16_t StorageRegister14;    /*!< General Storage Register */
-    __IO uint16_t StorageRegister15;    /*!< General Storage Register */    
+    __IO uint16_t AlarmMinutes;             /*!< Alarm register */
+    __IO uint16_t AlarmHours;               /*!< Alarm register */
+    __IO uint16_t AlarmDays;                /*!< Alarm register */
+    __IO uint16_t AlarmMounths;             /*!< Alarm register */
+    __IO uint16_t AlarmYears;               /*!< Alarm register */
+    __IO uint16_t InterruptControl;         /*!< External Interrupt Enable */
+    __IO uint16_t StorageRegister0;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister1;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister2;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister3;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister4;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister5;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister6;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister7;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister8;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister9;         /*!< General Storage Register */
+    __IO uint16_t StorageRegister10;        /*!< General Storage Register */
+    __IO uint16_t StorageRegister11;        /*!< General Storage Register */
+    __IO uint16_t StorageRegister12;        /*!< General Storage Register */
+    __IO uint16_t StorageRegister13;        /*!< General Storage Register */
+    __IO uint16_t StorageRegister14;        /*!< General Storage Register */
+    __IO uint16_t StorageRegister15;        /*!< General Storage Register */
 }RTC__TypeDef;
 
-typedef struct 
+typedef struct
 {
-    __IO uint32_t IPR;                  /*!< Interrupt Pending Register */
-    __IO uint32_t IPOL;                 /*!< Interrupt Polarity Register */
-    __IO uint32_t IER;                  /*!< Interrupt Enable Register */
-    __IO uint32_t ISEL;                 /*!< Interrupt Select Register */
-    __IO uint32_t ICOND;                /*!< Interrupt Condition Register */
-    __IO uint32_t FIQ;                  /*!< FIQ Interrupts Register */
-    __IO uint32_t IRQ;                  /*!< IRQ Interrupts Register */
-    __IO uint32_t TEST;                 /*!< Interrupt Test Register */
-    __IO uint16_t VECT;                 /*!< Interrupt Priority Vector Register */
-    __IO uint32_t INTRPTS;              /*!< Raw Interrupts Register */
-    __IO uint16_t RESERVE;                
-    __IO uint32_t ITYPE;                /*!< Interrupt Type Register */
+    __IO uint32_t IPR;                      /*!< Interrupt Pending Register */
+    __IO uint32_t IPOL;                     /*!< Interrupt Polarity Register */
+    __IO uint32_t IER;                      /*!< Interrupt Enable Register */
+    __IO uint32_t ISEL;                     /*!< Interrupt Select Register */
+    __IO uint32_t ICOND;                    /*!< Interrupt Condition Register */
+    __IO uint32_t FIQ;                      /*!< FIQ Interrupts Register */
+    __IO uint32_t IRQ;                      /*!< IRQ Interrupts Register */
+    __IO uint32_t TEST;                     /*!< Interrupt Test Register */
+    __IO uint16_t VECT;                     /*!< Interrupt Priority Vector Register */
+    __IO uint32_t INTRPTS;                  /*!< Raw Interrupts Register */
+    __IO uint16_t RESERVE;
+    __IO uint32_t ITYPE;                    /*!< Interrupt Type Register */
 }IntController1__TypeDef;
 
-typedef struct 
+typedef struct
 {
-    __IO uint16_t DATA;                 /*!< Writing inputs 8- or 16-bit data to the shift register. Reading reads 16-bit result */
-    __IO uint16_t RST;                  /*!< Writing resets shift register to 0xFFFF */
+    __IO uint16_t DATA;                     /*!< Writing inputs 8- or 16-bit data to the shift register. Reading reads 16-bit result */
+    __IO uint16_t RST;                      /*!< Writing resets shift register to 0xFFFF */
 }CRC__TypeDef;
 
 typedef struct
@@ -125,11 +134,11 @@ typedef struct
     __IO uint16_t RX_HOLDING;
     __IO uint16_t RX_DELAY;
     __IO uint8_t TIMEOUT;
-    __IO uint8_t RESERVED;              /*!< Requested Delay */
-    __IO uint16_t DELAY_COUNT;          /*!< Actual Delay Counted */
+    __IO uint8_t RESERVED;                  /*!< Requested Delay */
+    __IO uint16_t DELAY_COUNT;              /*!< Actual Delay Counted */
 }SerialPort_TypeDef;
 
-typedef struct 
+typedef struct
 {
     __IO uint16_t FRAME_CONTROL;
     __IO uint16_t STATUS;
@@ -154,7 +163,7 @@ typedef struct
     __IO uint16_t CGARS_FOR_BOF_EOF;
 }IRDA_TypeDef;
 
-typedef struct 
+typedef struct
 {
     __IO uint16_t GRP10_CTL;                /*!< Groups 1 & 0 Drive and DC Controls */
     __IO uint16_t GRP32_CTL;                /*!< Groups 3 & 2 Drive and DC Controls */
@@ -194,9 +203,9 @@ typedef struct
 
 typedef struct
 {
-    __IO uint16_t CONTROL;                  
-    __IO uint16_t BR;                       
-    __IO uint16_t CONFIG;                   
+    __IO uint16_t CONTROL;
+    __IO uint16_t BR;
+    __IO uint16_t CONFIG;
 }SDS_IRDA_PULSE_TypeDef;
 
 typedef struct
@@ -214,7 +223,7 @@ typedef struct
     __IO uint16_t CURRENT_SOURCE_LS;
     __IO uint16_t CURRENT_SOURCE_MS;
     __IO uint16_t CURRENT_DESTINATION_LS;
-    __IO uint16_t CURRENT_DESTINATION_MS;    
+    __IO uint16_t CURRENT_DESTINATION_MS;
 }DMA_Channel_TypeDef;
 
 typedef struct
@@ -259,7 +268,7 @@ typedef struct
     __IO uint16_t DSP_CONFIG;
     __IO uint16_t DSP_CONTROL;
     __IO uint16_t DSP_INT;
-    __IO uint16_t ASIC_MODE_CONTROL;    
+    __IO uint16_t ASIC_MODE_CONTROL;
 }CCB_TypeDef;
 
 
@@ -302,7 +311,7 @@ typedef struct
     __IO uint16_t PERIOD_HOLDING_MS;        /*!< 10 bit */
     __IO uint16_t COUNT_LS;                 /*!< Count value 16 bit */
     __IO uint16_t COUNT_MS;                 /*!< Count value 10 bit */
-    __IO uint16_t COMTROL                   /*!< Timer Control Register */
+    __IO uint16_t COMTROL;                  /*!< Timer Control Register */
 }Timer_TypeDef;
 
 
@@ -330,7 +339,6 @@ typedef struct
     __IO uint16_t BAUD_GEN;
     __IO uint16_t CONF;
 }IR_TRANS_TypeDef;
-
 
 
 #endif //CX805_H
