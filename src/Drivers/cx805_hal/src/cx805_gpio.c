@@ -16,100 +16,47 @@
 static GPIO_TypeDef *_GPIO = (GPIO_TypeDef *)GPIO_BASE_ADDR;
 
 /* ----- Local functions ---------------------------------------------------- */
+typedef struct
+{
+    uint16_t *CTL;
+    uint16_t *DAT;
+}GPIO_CustomPort;
 
-
+/* Lets use this table this allow fast acces to control registers */
+static const GPIO_CustomPort _GPIO_Table[] =
+{
+    [GPIOA] = {(uint16_t*)(GPIO_BASE_ADDR + 0x04), (uint16_t*)(GPIO_BASE_ADDR + 0x0C)},
+    [GPIOB] = {(uint16_t*)(GPIO_BASE_ADDR + 0x06), (uint16_t*)(GPIO_BASE_ADDR + 0x0E)},
+    [GPIOC] = {(uint16_t*)(GPIO_BASE_ADDR + 0x08), (uint16_t*)(GPIO_BASE_ADDR + 0x10)},
+    [GPIOD] = {(uint16_t*)(GPIO_BASE_ADDR + 0x0A), (uint16_t*)(GPIO_BASE_ADDR + 0x12)},
+    [GPIOE] = {(uint16_t*)(GPIO_BASE_ADDR + 0x1A), (uint16_t*)(GPIO_BASE_ADDR + 0x1C)},
+};
 /* =====> Implementation ---------------------------------------------------- */
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_Port GPIOx, uint16_t GPIO_Pin)
 {
-    GPIO_PinState PinState;
-
-    switch(GPIOx)
-    {
-    case GPIOA:
-        PinState = (_GPIO->GRPA_DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-        break;
-    case GPIOB:
-        PinState = (_GPIO->GRPB_DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-        break;
-    case GPIOC:
-        PinState = (_GPIO->GRPC_DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-        break;
-    case GPIOD:
-        PinState = (_GPIO->GRPD_DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-        break;
-    case GPIOE:
-        PinState = (_GPIO->GRPE_DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
-        break;
-    default:
-        ASSERT(TRUE);
-        break;
-    }
-
-    return PinState;
+    return (*_GPIO_Table[GPIOx].DAT & GPIO_Pin) ? GPIO_PIN_SET : GPIO_PIN_RESET;
 }
 
 void HAL_GPIO_WritePin(GPIO_Port GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
 {
-    const uint16_t NewState = (PinState == GPIO_PIN_SET)?(GPIO_Pin << 8U) : 0U;
-
-    switch(GPIOx)
+    if(PinState == GPIO_PIN_RESET)
     {
-    case GPIOA:
-        _GPIO->GRPA_DAT = NewState;
-        _GPIO->GRPA_DAT |= GPIO_Pin;
-        break;
-    case GPIOB:
-        _GPIO->GRPB_DAT = NewState;
-        _GPIO->GRPB_DAT |= GPIO_Pin;
-        break;
-    case GPIOC:
-        _GPIO->GRPC_DAT = NewState;
-        _GPIO->GRPC_DAT |= GPIO_Pin;
-        break;
-    case GPIOD:
-        _GPIO->GRPD_DAT = NewState;
-        _GPIO->GRPD_DAT |= GPIO_Pin;
-        break;
-    case GPIOE:
-        _GPIO->GRPE_DAT = NewState;
-        _GPIO->GRPE_DAT |= GPIO_Pin;
-        break;
-    default:
-        ASSERT(TRUE);
-        break;
+        *_GPIO_Table[GPIOx].DAT = GPIO_Pin;
+    }
+    else
+    {
+        *_GPIO_Table[GPIOx].DAT = (GPIO_Pin << 8U) | GPIO_Pin;
     }
 }
 
 void HAL_GPIO_TogglePin(GPIO_Port GPIOx, uint16_t GPIO_Pin)
 {
-    const uint16_t NewState = GPIO_Pin << 8U;
+    uint16_t temp = *_GPIO_Table[GPIOx].DAT;
 
-    switch(GPIOx)
-    {
-    case GPIOA:
-        _GPIO->GRPA_DAT ^= NewState;
-        _GPIO->GRPA_DAT |= GPIO_Pin;
-        break;
-    case GPIOB:
-        _GPIO->GRPB_DAT = NewState;
-        _GPIO->GRPB_DAT |= GPIO_Pin;
-        break;
-    case GPIOC:
-        _GPIO->GRPC_DAT ^= NewState;
-        _GPIO->GRPC_DAT |= GPIO_Pin;
-        break;
-    case GPIOD:
-        _GPIO->GRPD_DAT ^= NewState;
-        _GPIO->GRPD_DAT |= GPIO_Pin;
-        break;
-    case GPIOE:
-        _GPIO->GRPE_DAT ^= NewState;
-        _GPIO->GRPE_DAT |= GPIO_Pin;
-        break;
-    default:
-        ASSERT(TRUE);
-        break;
-    }
+    temp ^= GPIO_Pin << 8U;
+    temp |= GPIO_Pin;
+
+    *_GPIO_Table[GPIOx].DAT = temp;
 }
 
 void HAL_GPIO_ABCD_Init(GPIO_Port GPIOx, uint16_t GPIO_Pin, GPIO_PinMode Mode, GPIO_ABCD_DriveControl DriveControl, GPIO_DC_Control DC_Mode)
@@ -154,54 +101,16 @@ void HAL_GPIO_ABCD_Init(GPIO_Port GPIOx, uint16_t GPIO_Pin, GPIO_PinMode Mode, G
 
 
     /* Setup direction */
-    switch(GPIOx)
+    if(Mode == GPIO_PIN_INPUT)
     {
-    case GPIOA:
-        if(Mode == GPIO_PIN_INPUT)
-        {
-            _GPIO->GRPA_CTL |= PinMask;
-        }
-        else
-        {
-            _GPIO->GRPA_CTL &= ~PinMask;
-        }
-        break;
-    case GPIOB:
-        if(Mode == GPIO_PIN_INPUT)
-        {
-            _GPIO->GRPB_CTL |= PinMask;
-        }
-        else
-        {
-            _GPIO->GRPB_CTL &= ~PinMask;
-        }
-        break;
-    case GPIOC:
-        if(Mode == GPIO_PIN_INPUT)
-        {
-            _GPIO->GRPC_CTL |= PinMask;
-        }
-        else
-        {
-            _GPIO->GRPC_CTL &= ~PinMask;
-        }
-        break;
-    case GPIOD:
-        if(Mode == GPIO_PIN_INPUT)
-        {
-            _GPIO->GRPD_CTL |= PinMask;
-        }
-        else
-        {
-            _GPIO->GRPD_CTL &= ~PinMask;
-        }
-        break;
-    default:
-        ASSERT(TRUE);
-        break;
+        *_GPIO_Table[GPIOx].CTL |= PinMask;
+    }
+    else
+    {
+        *_GPIO_Table[GPIOx].CTL &= ~PinMask;
     }
 }
-
+//TODO one init function
 void HAL_GPIO_E_Init(uint16_t GPIO_Pin, GPIO_PinMode Mode, GPIOE_DriveControl DriveControl, GPIO_DC_Control DC_Mode)
 {
     uint32_t PinNum = 0;
@@ -210,7 +119,7 @@ void HAL_GPIO_E_Init(uint16_t GPIO_Pin, GPIO_PinMode Mode, GPIOE_DriveControl Dr
     /* Set DC controls and DRIVE controls */
     while(Pin)
     {
-        if(GPIO_Pin & 1U)
+        if(Pin & 1U)
         {
             _GPIO->GRPE_DC = DC_Mode << PinNum;
             _GPIO->GRPE_DRV = DriveControl << PinNum;

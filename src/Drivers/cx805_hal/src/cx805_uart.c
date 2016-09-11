@@ -37,7 +37,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle)
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.StopBits;
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.Parity;
 
-        Handle->Instance->TX_BR =(uint16_t) (Handle->Init.BaudRate / UART_CLK);
+        Handle->Instance->TX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate );
 
         Handle->Instance->TX_CONTROL |= UART_CONTROL_PIO;
         Handle->Instance->TX_CONTROL |= UART_CONTROL_EN;
@@ -52,7 +52,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle)
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.StopBits;
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.Parity;
 
-        Handle->Instance->RX_BR =(uint16_t) (Handle->Init.BaudRate / UART_CLK);
+        Handle->Instance->RX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate);
 
         Handle->Instance->RX_CONTROL |= UART_CONTROL_PIO;
         Handle->Instance->RX_CONTROL |= UART_CONTROL_EN;
