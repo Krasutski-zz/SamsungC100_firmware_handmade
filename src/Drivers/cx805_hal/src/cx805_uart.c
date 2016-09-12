@@ -28,33 +28,34 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle)
         return HAL_ERROR;
     }
 
+    Handle->Instance->RX_CONTROL &= ~UART_CONTROL_EN;
+    Handle->Instance->RX_CONTROL &= ~UART_CONTROL_PARAMS_MASK;
+
+    Handle->Instance->TX_CONTROL &= ~UART_CONTROL_EN;
+    Handle->Instance->TX_CONTROL &= ~UART_CONTROL_PARAMS_MASK;
+
     if(Handle->Init.Mode & UART_MODE_TX)
     {
-        Handle->Instance->TX_CONTROL &= ~UART_CONTROL_EN;
-        Handle->Instance->TX_CONTROL &= ~UART_CONTROL_PARAMS_MASK;
 
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.WordLength;
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.StopBits;
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.Parity;
+        Handle->Instance->TX_CONTROL |= UART_CONTROL_PIO;
 
         Handle->Instance->TX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate );
 
-        Handle->Instance->TX_CONTROL |= UART_CONTROL_PIO;
         Handle->Instance->TX_CONTROL |= UART_CONTROL_EN;
     }
-
     if(Handle->Init.Mode & UART_MODE_RX)
     {
-        Handle->Instance->RX_CONTROL &= ~UART_CONTROL_EN;
-        Handle->Instance->RX_CONTROL &= ~UART_CONTROL_PARAMS_MASK;
 
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.WordLength;
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.StopBits;
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.Parity;
+        Handle->Instance->RX_CONTROL |= UART_CONTROL_PIO;
 
         Handle->Instance->RX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate);
 
-        Handle->Instance->RX_CONTROL |= UART_CONTROL_PIO;
         Handle->Instance->RX_CONTROL |= UART_CONTROL_EN;
     }
 
