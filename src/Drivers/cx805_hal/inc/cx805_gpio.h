@@ -21,16 +21,16 @@ typedef enum
 {
     GPIO_PIN_RESET = 0,
     GPIO_PIN_SET
-}GPIO_PinState;
+}GPIO_PinState_t;
 
 /**
-* @brief  GPIO Port input mode enumeration
+* @brief  GPIO Port mode enumeration
 */
 typedef enum
 {
     GPIO_PIN_INPUT = 0,
     GPIO_PIN_OUTPUT
-}GPIO_PinMode;
+}GPIO_PinMode_t;
 
 /**
 * @brief  GPIO Port list enumeration
@@ -42,7 +42,7 @@ typedef enum
     GPIOC,
     GPIOD,
     GPIOE,
-}GPIO_Port;
+}GPIO_Port_t;
 
 /**
 * @brief  GPIO DC control list mode apply for A-C ports
@@ -57,7 +57,7 @@ typedef enum
     DRIVE_12_8MA = 0x05,
     DRIVE_14_8MA = 0x06,
     DRIVE_16_8MA = 0x07,
-}GPIO_ABCD_DriveControl;
+}GPIO_DriveControl;
 
 /**
 * @brief  GPIO DC control list mode (A-E)
@@ -79,7 +79,24 @@ typedef enum
     DRIVE_E_4_8MA = 0x01,
     DRIVE_E_10_8MA = 0x02,
     DRIVE_E_14_8MA = 0x04,
-}GPIOE_DriveControl;
+}GPIO_DriveControl_PortE;
+
+/**
+* @brief  GPIO power control paramaters, except PortE
+*/
+typedef struct
+{
+    uint32_t Group0_DriveControl;
+    uint32_t Group1_DriveControl;
+    uint32_t Group2_DriveControl;
+    uint32_t Group3_DriveControl;
+    uint32_t Group0_DC_Control;
+    uint32_t Group1_DC_Control;
+    uint32_t Group2_DC_Control;
+    uint32_t Group3_DC_Control;
+    uint32_t EnableAlternateDCs;    /*!< @ref GPIO_Alternate_DC */
+}GPIO_PowerControl_t;
+
 
 /** @defgroup GPIO_pins_define GPIO pins define
 * @{
@@ -96,19 +113,19 @@ typedef enum
 * @}
 */
 
-#define GPIO_GROUP10_G1_DRIVE_MASK  ((uint16_t)0x7000)
-#define GPIO_GROUP10_G0_DRIVE_MASK  ((uint16_t)0x0070)
-#define GPIO_GROUP10_G1_DC_MASK     ((uint16_t)0x0300)
-#define GPIO_GROUP10_G0_DC_MASK     ((uint16_t)0x0003)
-#define GPIO_GROUP32_G3_DRIVE_MASK  ((uint16_t)0x7000)
-#define GPIO_GROUP32_G2_DRIVE_MASK  ((uint16_t)0x0070)
-#define GPIO_GROUP32_G3_DC_MASK     ((uint16_t)0x0300)
-#define GPIO_GROUP32_G2_DC_MASK     ((uint16_t)0x0003)
+/** @defgroup GPIO_Alternate_DC enable list
+* @{
+*/
+#define GPIO_ALTERNATE_DC_PORTA_EN     ((uint16_t)0x0004)
+#define GPIO_ALTERNATE_DC_PORTB_EN     ((uint16_t)0x0008)
+#define GPIO_ALTERNATE_DC_PORTC_EN     ((uint16_t)0x0400)
+/**
+* @}
+*/
 
-#define GPIO_GROUP10_A_PORTA_EN     ((uint16_t)0x0004)
-#define GPIO_GROUP10_B_PORTA_EN     ((uint16_t)0x0008)
-#define GPIO_GROUP10_C_PORTA_EN     ((uint16_t)0x0400)
-
+/** @defgroup GPIO bit shift for confirure gpoups:0123
+* @{
+*/
 #define GPIO_GROUP10_G1_DRIVE_SHIFT (12U)
 #define GPIO_GROUP10_G0_DRIVE_SHIFT (4U)
 #define GPIO_GROUP10_G1_DC_SHIFT    (8U)
@@ -117,17 +134,17 @@ typedef enum
 #define GPIO_GROUP32_G2_DRIVE_SHIFT (4U)
 #define GPIO_GROUP32_G3_DC_SHIFT    (8U)
 #define GPIO_GROUP32_G2_DC_SHIFT    (0U)
-
-/* ----- Settings ----------------------------------------------------------- */
-
+/**
+* @}
+*/
 
 /* ----- Prototypes --------------------------------------------------------- */
-GPIO_PinState HAL_GPIO_ReadPin(GPIO_Port GPIOx, uint16_t GPIO_Pin);
-void HAL_GPIO_WritePin(GPIO_Port GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
-void HAL_GPIO_TogglePin(GPIO_Port GPIOx, uint16_t GPIO_Pin);
-void HAL_GPIO_ABCD_Init(GPIO_Port GPIOx, uint16_t GPIO_Pin, GPIO_PinMode Mode, GPIO_ABCD_DriveControl DriveControl, GPIO_DC_Control DC_Mode);
-void HAL_GPIO_E_Init(uint16_t GPIO_Pin, GPIO_PinMode Mode, GPIOE_DriveControl DriveControl, GPIO_DC_Control DC_Mode);
-void HAL_GPIO_AlternativeDC(GPIO_Port GPIOx, FunctionalState State);
+GPIO_PinState_t HAL_GPIO_ReadPin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin);
+void HAL_GPIO_WritePin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin, GPIO_PinState_t PinState);
+void HAL_GPIO_TogglePin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin);
+void HAL_GPIO_Init(GPIO_Port_t GPIOx, uint16_t GPIO_Pin, GPIO_PinMode_t Mode);
+void HAL_GPIO_SetPower(GPIO_PowerControl_t *PowerParams);
+void HAL_GPIO_SetPower_GPIOE(uint16_t GPIO_Pin, GPIO_DriveControl_PortE DriveControl, GPIO_DC_Control DC_Mode);
 #ifdef __cplusplus
  }
 #endif /* __cplusplus */

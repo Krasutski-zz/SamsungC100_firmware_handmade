@@ -17,6 +17,22 @@ void delay(volatile  uint32_t delay)
 
 int main()
 {
+    GPIO_PowerControl_t PowerParams;
+
+    PowerParams.Group0_DriveControl = DRIVE_4_8MA;
+    PowerParams.Group0_DC_Control = DC_10UA_PULL_UP;
+    PowerParams.Group1_DriveControl = DRIVE_4_8MA;
+    PowerParams.Group1_DC_Control = DC_10UA_PULL_UP;
+    PowerParams.Group2_DriveControl = DRIVE_4_8MA;
+    PowerParams.Group2_DC_Control = DC_10UA_PULL_UP;
+    PowerParams.Group3_DriveControl = DRIVE_4_8MA;
+    PowerParams.Group3_DC_Control = DC_10UA_PULL_UP;
+    PowerParams.EnableAlternateDCs = GPIO_ALTERNATE_DC_PORTA_EN;
+    HAL_GPIO_SetPower(&PowerParams);
+
+    HAL_GPIO_SetPower_GPIOE(GPIO_PIN_2 |GPIO_PIN_3, DRIVE_E_0_8MA, DC_10UA_PULL_UP);
+
+
     DebugPort.Instance = (SerialPort_TypeDef*)DEBUG_UART_BASE_ADDR;
     DebugPort.Init.BaudRate = 115200;
     DebugPort.Init.WordLength = UART_WORDLENGTH_8B;
