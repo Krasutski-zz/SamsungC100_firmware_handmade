@@ -1,5 +1,6 @@
 #include <cx805_gpio.h>
 #include <cx805_uart.h>
+#include <cx805_i2c.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -54,6 +55,14 @@ int main()
     int n = 0;
     uint8_t str[64];
 
+
+    uint8_t PowerOn[] = {0x03, 0x01};
+    if(HAL_I2C_Write(0x90, PowerOn, sizeof(PowerOn)) == HAL_OK)
+    {
+        sprintf((char*)str,"Power On! Let's work.");
+        HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
+    }
+
     for(;;)
     {
         ++n;
@@ -69,7 +78,14 @@ int main()
 
         sprintf((char*)str,"Test Message SDS %d\r\n", n);
         HAL_UART_Transmit(&SDSPort, str, strlen((char*)str));
+
     }
 
     //return 0;
+}
+
+void Default_Handler( void );
+void Default_Handler( void )
+{
+	for( ;; );
 }

@@ -2123,11 +2123,17 @@
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_gpio.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_i2c.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_uart.c</name>
         </file>
       </group>
     </group>
   </group>
+  <file>
+    <name>$PROJ_DIR$\cx805_vect.s</name>
+  </file>
   <file>
     <name>$PROJ_DIR$\..\main.c</name>
   </file>
