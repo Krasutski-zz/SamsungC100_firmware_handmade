@@ -24,7 +24,6 @@ HAL_StatusTypeDef HAL_I2C_Init();
 HAL_StatusTypeDef HAL_I2C_Write(uint8_t Addr, uint8_t *Data, uint8_t Lenght);
 HAL_StatusTypeDef HAL_I2C_Read(uint8_t Addr, uint8_t *Data, uint8_t Lenght);
 
-
 #ifdef __cplusplus
  }
 #endif /* __cplusplus */

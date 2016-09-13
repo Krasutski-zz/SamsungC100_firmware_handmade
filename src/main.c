@@ -61,6 +61,15 @@ int main()
     {
         sprintf((char*)str,"Power On! Let's work.");
         HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
+
+        uint8_t RdReg[16] ={0x00);
+        HAL_I2C_Read(0x90, RdReg, sizeof(RdReg));
+        for(i=0; i<16; i++)
+        {
+            sprintf((char*)str,"REG[%02X]=0x%02X\r\b", i+1, RdReg[i+1]);
+            HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
+
+        }
     }
 
     for(;;)
