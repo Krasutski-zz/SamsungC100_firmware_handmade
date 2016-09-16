@@ -8,7 +8,7 @@
 /* ----- Types -------------------------------------------------------------- */
 
 /* ----- Settings ----------------------------------------------------------- */
-#define UART_CLK        3900000U
+#define SYSTEM_CLK        3900000U
 
 /* ----- Global variables --------------------------------------------------- */
 
@@ -42,7 +42,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle)
         Handle->Instance->TX_CONTROL |= (uint16_t)Handle->Init.Parity;
         Handle->Instance->TX_CONTROL |= UART_CONTROL_PIO;
 
-        Handle->Instance->TX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate );
+        Handle->Instance->TX_BR =(uint16_t) (SYSTEM_CLK / Handle->Init.BaudRate );
 
         Handle->Instance->TX_CONTROL |= UART_CONTROL_EN;
     }
@@ -54,7 +54,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle)
         Handle->Instance->RX_CONTROL |= (uint16_t)Handle->Init.Parity;
         Handle->Instance->RX_CONTROL |= UART_CONTROL_PIO;
 
-        Handle->Instance->RX_BR =(uint16_t) (UART_CLK / Handle->Init.BaudRate);
+        Handle->Instance->RX_BR =(uint16_t) (SYSTEM_CLK / Handle->Init.BaudRate);
 
         Handle->Instance->RX_CONTROL |= UART_CONTROL_EN;
     }

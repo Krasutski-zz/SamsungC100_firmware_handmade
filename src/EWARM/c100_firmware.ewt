@@ -2108,6 +2108,9 @@
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\inc\cx805.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\Drivers\cx805_hal\inc\cx805_clk.h</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\inc\cx805_gpio.h</name>
         </file>
         <file>
@@ -2120,6 +2123,9 @@
       <group>
         <name>src</name>
         <file>
+          <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_clk.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_gpio.c</name>
         </file>
         <file>
@@ -2131,9 +2137,6 @@
       </group>
     </group>
   </group>
-  <file>
-    <name>$PROJ_DIR$\cx805_vect.s</name>
-  </file>
   <file>
     <name>$PROJ_DIR$\..\main.c</name>
   </file>

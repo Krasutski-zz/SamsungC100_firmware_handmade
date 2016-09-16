@@ -12,11 +12,6 @@
 
 #include <stdint.h>
 
-
-#ifndef __IO
-#define __IO    volatile
-#endif
-
 #define AMBA_BASE_ADDR                      ((uint32_t)0x00040010)
 #define RTC_BASE_ADDR                       ((uint32_t)0x00040080)
 #define INT_CONTROLLER1_BASE_ADDR           ((uint32_t)0x00040100)
@@ -47,9 +42,9 @@
 #define IR_TRANS_BASE_ADDR                  ((uint32_t)0x00041600)
 #define INT_CONTROLLER2_BASE_ADDR           ((uint32_t)0x00041720)
 
-
-
-
+#ifndef __IO
+#define __IO    volatile
+#endif
 
 typedef struct
 {
@@ -249,14 +244,12 @@ typedef struct
     __IO uint16_t BLOCK_STATE;
 }Autobaud_TypeDef;
 
-
 typedef struct
 {
     __IO uint16_t CONTROL;                          /*<! GPIO for keypad control */
     __IO uint16_t STROBE;                           /*<!  */
     __IO uint16_t RETURN;                           /*<!  */
 }Keypad_TypeDef;
-
 
 typedef struct
 {
@@ -271,7 +264,6 @@ typedef struct
     __IO uint16_t ASIC_MODE_CONTROL;
 }CCB_TypeDef;
 
-
 typedef struct
 {
     __IO uint16_t CONTROL;
@@ -281,7 +273,6 @@ typedef struct
     __IO uint16_t PATTERN_LS;
     __IO uint16_t PATTERN_MS;
 }PWM_TypeDef;
-
 
 typedef struct
 {
@@ -294,14 +285,12 @@ typedef struct
     __IO uint16_t DMA_DELAY_COUNT;
 }SIM_TypeDef;
 
-
 typedef struct
 {
     __IO uint16_t CONTROL;
     __IO uint16_t DIVIDERS;
     __IO uint16_t EXTERNAL_CONTROL;
 }PLL_TypeDef;
-
 
 typedef struct
 {
@@ -313,7 +302,6 @@ typedef struct
     __IO uint16_t COUNT_MS;                 /*!< Count value 10 bit */
     __IO uint16_t COMTROL;                  /*!< Timer Control Register */
 }Timer_TypeDef;
-
 
 typedef struct
 {
@@ -332,13 +320,11 @@ typedef struct
     __IO uint16_t CRC_MS;
 }GENDEX_TypeDef;
 
-
 typedef struct
 {
     __IO uint16_t CONTROL;
     __IO uint16_t BAUD_GEN;
     __IO uint16_t CONF;
 }IR_TRANS_TypeDef;
-
 
 #endif //CX805_H

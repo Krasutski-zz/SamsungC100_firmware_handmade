@@ -1,7 +1,18 @@
-/* begin: cx805_gpio.h ----- */
-/* created 9/7/2016 by user ----------------------------------- */
-
-
+/**
+  ******************************************************************************
+  * @file    cx805_gpio.h
+  * @author  DKrasutski@gmail.com
+  * @version V1.0
+  * @date    9/7/2016
+  * @brief   This file contains all the functions prototypes for the
+  *          GPIO driver.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; COPYRIGHT(c) 2016 Denis Krasutski </center></h2>
+  *
+  ******************************************************************************
+  */
 #ifndef __CX805_GPIO_H__
 #define __CX805_GPIO_H__
 
@@ -9,11 +20,10 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* ----- Includes ----------------------------------------------------------- */
+/* Includes ------------------------------------------------------------------*/
 #include <cx805_hal.h>
 
-/* ----- Types -------------------------------------------------------------- */
-
+/* Exported types ------------------------------------------------------------*/
 /**
 * @brief  GPIO Bit SET and Bit RESET enumeration
 */
@@ -97,7 +107,8 @@ typedef struct
     uint32_t EnableAlternateDCs;    /*!< @ref GPIO_Alternate_DC */
 }GPIO_PowerControl_t;
 
-
+/* Exported constants --------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
 /** @defgroup GPIO_pins_define GPIO pins define
 * @{
 */
@@ -138,7 +149,9 @@ typedef struct
 * @}
 */
 
-/* ----- Prototypes --------------------------------------------------------- */
+/* Exported constants --------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
 GPIO_PinState_t HAL_GPIO_ReadPin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin);
 void HAL_GPIO_WritePin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin, GPIO_PinState_t PinState);
 void HAL_GPIO_TogglePin(GPIO_Port_t GPIOx, uint16_t GPIO_Pin);

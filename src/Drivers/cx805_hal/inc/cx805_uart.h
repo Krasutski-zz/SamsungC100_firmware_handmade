@@ -1,8 +1,18 @@
-
-/* begin: cx805_uart.h ----- */
-/* created 9/9/2016 by user ----------------------------------- */
-
-
+/**
+  ******************************************************************************
+  * @file    cx805_uart.h
+  * @author  DKrasutski@gmail.com
+  * @version V1.0
+  * @date    9/9/2016
+  * @brief   This file contains all the functions prototypes for the UART
+  *          driver.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; COPYRIGHT(c) 2016 Denis Krasutski </center></h2>
+  *
+  ******************************************************************************
+  */
 #ifndef __CX805_UART_H__
 #define __CX805_UART_H__
 
@@ -10,10 +20,10 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* ----- Includes ----------------------------------------------------------- */
+/* Includes ------------------------------------------------------------------*/
 #include <cx805_hal.h>
 
-/* ----- Types -------------------------------------------------------------- */
+/* Exported types ------------------------------------------------------------*/
 
 /** @defgroup UART_Word_Length UART Word Length
 * @{
@@ -88,10 +98,10 @@ typedef struct
     UART_InitTypeDef    Init;           /*!< UART communication parameters      */
 
 }UART_HandleTypeDef;
-/* ----- Settings ----------------------------------------------------------- */
 
-
-/* ----- Prototypes --------------------------------------------------------- */
+/* Exported constants --------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
 
 HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *Handle);
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *Handle, const uint8_t *pData, uint32_t Lenght);

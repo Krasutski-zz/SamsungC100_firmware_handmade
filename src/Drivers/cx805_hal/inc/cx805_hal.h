@@ -1,8 +1,18 @@
-
-/* begin: cx805_hal.h ----- */
-/* created 9/7/2016 by user ----------------------------------- */
-
-
+/**
+  ******************************************************************************
+  * @file    cx805_hal.h
+  * @author  DKrasutski@gmail.com
+  * @version V1.0
+  * @date    9/7/2016
+  * @brief   This file contains all the functions prototypes for the HAL
+  *          module driver.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; COPYRIGHT(c) 2016 Denis Krasutski </center></h2>
+  *
+  ******************************************************************************
+  */
 #ifndef __CX805_HAL_H__
 #define __CX805_HAL_H__
 
@@ -10,17 +20,13 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* ----- Includes ----------------------------------------------------------- */
+/* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 #include <stddef.h>
 
 #include <cx805.h>
 
-/* ----- Types -------------------------------------------------------------- */
-
-/**
-  * @brief  HAL Status structures definition
-  */
+/* Exported types ------------------------------------------------------------*/
 typedef enum
 {
   HAL_OK       = 0x00,
@@ -35,11 +41,11 @@ typedef enum
   ENABLE = !DISABLE
 } FunctionalState;
 
-/* ----- Settings ----------------------------------------------------------- */
-#ifndef ASSERT
-#define ASSERT(n)
-#endif
-/* ----- Prototypes --------------------------------------------------------- */
+/* Exported constants --------------------------------------------------------*/
+#define SYSTEM_CLK        3900000U
+/* Exported macro ------------------------------------------------------------*/
+
+/* Exported functions --------------------------------------------------------*/
 
 #ifdef __cplusplus
  }
