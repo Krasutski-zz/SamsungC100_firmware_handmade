@@ -2138,6 +2138,9 @@
     </group>
   </group>
   <file>
+    <name>$PROJ_DIR$\cx805_vect.s</name>
+  </file>
+  <file>
     <name>$PROJ_DIR$\..\main.c</name>
   </file>
 </project>

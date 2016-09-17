@@ -31,7 +31,7 @@
 #define SLEEP_TMR_BASE_ADDR                 ((uint32_t)0x00040700)
 #define AUTO_BAUND_BASE_ADDR                ((uint32_t)0x00040740)
 #define KEYPAD_BASE_ADDR                    ((uint32_t)0x00040800)
-#define CCB_BASE_ADDR                       ((uint32_t)0x00040902)
+#define CLOCK_CONTROL_BASE_ADDR             ((uint32_t)0x00040902)
 #define PWM_BASE_ADDR                       ((uint32_t)0x00040A00)
 #define SIM_BASE_ADDR                       ((uint32_t)0x00040A80)
 #define PLL_BASE_ADDR                       ((uint32_t)0x00040B00)
@@ -253,16 +253,16 @@ typedef struct
 
 typedef struct
 {
-    __IO uint16_t CONTROL1;
-    __IO uint16_t FORCE1;
-    __IO uint16_t CONTROL2;
-    __IO uint16_t FORCE2;
-    __IO uint16_t REQUEST_VECTOR;
-    __IO uint16_t DSP_CONFIG;
-    __IO uint16_t DSP_CONTROL;
-    __IO uint16_t DSP_INT;
-    __IO uint16_t ASIC_MODE_CONTROL;
-}CCB_TypeDef;
+    __IO uint16_t CONTROL1;                         /*<! Clock Enables, Sleep Request */
+    __IO uint16_t FORCE1;                           /*<! Clock Forces */
+    __IO uint16_t CONTROL2;                         /*<! Clock Enables */
+    __IO uint16_t FORCE2;                           /*<! Clock Forces */
+    __IO uint16_t REQUEST_VECTOR;                   /*<! */
+    __IO uint16_t DSP_CONFIG;                       /*<! */
+    __IO uint16_t DSP_CONTROL;                      /*<! */
+    __IO uint16_t DSP_INT;                          /*<! */
+    __IO uint16_t ASIC_MODE_CONTROL;                /*<! */
+}ClockControl_TypeDef;
 
 typedef struct
 {
@@ -287,9 +287,9 @@ typedef struct
 
 typedef struct
 {
-    __IO uint16_t CONTROL;
-    __IO uint16_t DIVIDERS;
-    __IO uint16_t EXTERNAL_CONTROL;
+    __IO uint16_t CONTROL;                  /*!< P & N Divide Values, Test Port Enable */
+    __IO uint16_t DIVIDERS;                 /*!< ARM, ARM2x, PLL_ROOT */
+    __IO uint16_t EXTERNAL_CONTROL;         /*!< PLL Enable */
 }PLL_TypeDef;
 
 typedef struct
