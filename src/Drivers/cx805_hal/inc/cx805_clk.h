@@ -61,7 +61,7 @@ typedef enum PLL_Q_Div
 #define PLL_CLOCK_TIMER_B       ((uint16_t) 0x0020)
 #define PLL_CLOCK_CRC           ((uint16_t) 0x0040)
 #define PLL_CLOCK_PTGA          ((uint16_t) 0x0080)
-#define PLL_CLOCK_PTCB          ((uint16_t) 0x0100)
+#define PLL_CLOCK_PTGB          ((uint16_t) 0x0100)
 #define PLL_CLOCK_DEBUG_PORT    ((uint16_t) 0x0200)
 #define PLL_CLOCK_SDS_PORT      ((uint16_t) 0x0400)
 #define PLL_CLOCK_AUTOBAUD      ((uint16_t) 0x0800)

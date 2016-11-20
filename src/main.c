@@ -21,16 +21,20 @@ void delay(volatile  uint32_t delay)
 
 int main()
 {
-
     HAL_ClockPeriphControl(
-                           PLL_CLOCK_ARM_CORE |
-                           PLL_CLOCK_AM |
-                           PLL_CLOCK_SLP |
+//                           PLL_CLOCK_ARM_CORE |
+//                           PLL_CLOCK_AM |
+//                           PLL_CLOCK_SLP |
+//                           PLL_CLOCK_PTGA |
+//                           PLL_CLOCK_PTGB |
+                           //PLL_CLOCK_DSP |
                            PLL_CLOCK_DEBUG_PORT |
                            PLL_CLOCK_SDS_PORT
                            , ENABLE);
 
-    //HAL_PLL_Init(PLL_P_DIV_2, PLL_Q_DIV_2, 10);
+    HAL_PLL_Init(PLL_P_DIV_1, PLL_Q_DIV_2, 11);
+
+
 
     GPIO_PowerControl_t PowerParams;
 
@@ -69,11 +73,11 @@ int main()
     int n = 0;
     uint8_t str[64];
 
-
     uint8_t PowerOn[] = {PM_CONTROL, PMCR_PHONE_ON};
     if(HAL_I2C_Write(0x90, PowerOn, sizeof(PowerOn)) == HAL_OK)
     {
         sprintf((char*)str,"Power On! Let's work.\r\n");
+
         HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
 
         uint8_t RdReg[16] ={0x00};
@@ -85,9 +89,8 @@ int main()
         }
     }
 
-
     uint32_t Clock = HAL_GetFreq();
-    sprintf((char*)str,"ARM Core Freq=%d\r\b", Clock);
+    sprintf((char*)str,"ARM Core Freq=%d Hz\r\n", Clock);
     HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
     HAL_UART_Transmit(&SDSPort, str, strlen((char*)str));
 
