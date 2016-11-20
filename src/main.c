@@ -3,6 +3,8 @@
 #include <cx805_i2c.h>
 #include <cx805_clk.h>
 
+#include "cx20524.h"
+
 #include <stdio.h>
 #include <string.h>
 
@@ -68,17 +70,17 @@ int main()
     uint8_t str[64];
 
 
-    uint8_t PowerOn[] = {0x03, 0x01};
+    uint8_t PowerOn[] = {PM_CONTROL, PMCR_PHONE_ON};
     if(HAL_I2C_Write(0x90, PowerOn, sizeof(PowerOn)) == HAL_OK)
     {
-        sprintf((char*)str,"Power On! Let's work.");
+        sprintf((char*)str,"Power On! Let's work.\r\n");
         HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
 
         uint8_t RdReg[16] ={0x00};
         HAL_I2C_Read(0x90, RdReg, sizeof(RdReg));
         for(int i=0; i<16; i++)
         {
-            sprintf((char*)str,"REG[%02X]=0x%02X\r\b", i+1, RdReg[i+1]);
+            sprintf((char*)str,"REG[%02X]=0x%02X\r\n", i, RdReg[i+1]);
             HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
         }
     }
