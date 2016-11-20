@@ -12,8 +12,7 @@
 
 #include <stdint.h>
 
-#define AMBA_BASE_ADDR                      ((uint32_t)0x00040010)
-#define INT_CONTROLLER2_BASE_ADDR           ((uint32_t)0x00041720)
+#define CX20524_I2C_ADDR                    (0x)
 
 typedef enum Reg8BitList_e
 {

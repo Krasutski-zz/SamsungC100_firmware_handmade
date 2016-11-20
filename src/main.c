@@ -74,7 +74,7 @@ int main()
     uint8_t str[64];
 
     uint8_t PowerOn[] = {PM_CONTROL, PMCR_PHONE_ON};
-    if(HAL_I2C_Write(0x90, PowerOn, sizeof(PowerOn)) == HAL_OK)
+    if(HAL_I2C_Write(CX20524_I2C_ADDR << 1, PowerOn, sizeof(PowerOn)) == HAL_OK)
     {
         sprintf((char*)str,"Power On! Let's work.\r\n");
 
