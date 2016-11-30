@@ -81,7 +81,7 @@ int main()
         HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
 
         uint8_t RdReg[16] ={0x00};
-        HAL_I2C_Read(0x90, RdReg, sizeof(RdReg));
+        HAL_I2C_Read(CX20524_I2C_ADDR << 1, RdReg, sizeof(RdReg));
         for(int i=0; i<15; i++)
         {
             sprintf((char*)str,"REG[%02X]=0x%02X\r\n", i, RdReg[i+1]);

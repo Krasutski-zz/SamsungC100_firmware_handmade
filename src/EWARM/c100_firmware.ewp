@@ -1925,6 +1925,15 @@
         </file>
       </group>
     </group>
+    <group>
+      <name>CX20524_PMU</name>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.h</name>
+      </file>
+    </group>
   </group>
   <file>
     <name>$PROJ_DIR$\cx805_vect.s</name>

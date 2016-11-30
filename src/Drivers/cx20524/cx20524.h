@@ -13,6 +13,12 @@
 #include <stdint.h>
 
 #define CX20524_I2C_ADDR                    (0x48)
+typedef struct
+{
+	CX20524_RESULT_OK = 0,
+	CX20524_RESULT_ERROR,
+}cx20524_status_t;
+
 
 typedef enum Reg8BitList_e
 {
