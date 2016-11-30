@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#define CX20524_I2C_ADDR                    (0x)
+#define CX20524_I2C_ADDR                    (0x48)
 
 typedef enum Reg8BitList_e
 {

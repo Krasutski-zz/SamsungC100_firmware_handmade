@@ -40,6 +40,8 @@ uint32_t HAL_GetFreq()
     uint32_t Q = (_PLL->CONTROL & PLL_Q_DIV_MASK) >> PLL_Q_DIV_SHIFT;
     uint32_t N = (_PLL->CONTROL & PLL_N_MULT_MASK) >> PLL_N_MULT_SHIFT;
 
+    //TODO Check zero
+
     return SYSTEM_CLK / P * N / Q;
 }
 
