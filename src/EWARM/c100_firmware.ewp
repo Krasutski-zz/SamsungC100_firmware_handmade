@@ -303,6 +303,8 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Drivers\cx805_hal\inc</state>
           <state>$PROJ_DIR$\..\Drivers\cx20524</state>
+          <state>$PROJ_DIR$\..\App</state>
+          <state>$PROJ_DIR$\..\bsp</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1888,7 +1890,55 @@
     </settings>
   </configuration>
   <group>
+    <name>app</name>
+    <group>
+      <name>logger</name>
+      <file>
+        <name>$PROJ_DIR$\..\App\logger\logger.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\App\logger\logger.h</name>
+      </file>
+    </group>
+  </group>
+  <group>
+    <name>bsp</name>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\bsp.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\bsp.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\clocks.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\clocks.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\gpio.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\gpio.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\uart.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\bsp\uart.h</name>
+    </file>
+  </group>
+  <group>
     <name>Drivers</name>
+    <group>
+      <name>CX20524_PMU</name>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.h</name>
+      </file>
+    </group>
     <group>
       <name>HAL</name>
       <group>
@@ -1924,15 +1974,6 @@
           <name>$PROJ_DIR$\..\Drivers\cx805_hal\src\cx805_uart.c</name>
         </file>
       </group>
-    </group>
-    <group>
-      <name>CX20524_PMU</name>
-      <file>
-        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Drivers\cx20524\cx20524.h</name>
-      </file>
     </group>
   </group>
   <file>
