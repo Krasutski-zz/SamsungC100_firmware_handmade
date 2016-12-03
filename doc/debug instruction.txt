@@ -1,0 +1,3 @@
+Use jlink vJLinkARM_V454b libs!!!
+Only this version work correctly!!!
+Tap number 1
