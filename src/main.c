@@ -1,15 +1,17 @@
-#include <cx805_gpio.h>
-#include <cx805_uart.h>
+
+
 #include <cx805_i2c.h>
-#include <cx805_clk.h>
+
 
 #include "cx20524.h"
 
 #include <stdio.h>
 #include <string.h>
 
-UART_HandleTypeDef DebugPort;
-UART_HandleTypeDef SDSPort;
+#include "bsp.h"
+
+#include "logger/logger.h"
+
 
 void delay(volatile  uint32_t delay)
 {
@@ -21,97 +23,46 @@ void delay(volatile  uint32_t delay)
 
 int main()
 {
-    HAL_ClockPeriphControl(
-//                           PLL_CLOCK_ARM_CORE |
-//                           PLL_CLOCK_AM |
-//                           PLL_CLOCK_SLP |
-//                           PLL_CLOCK_PTGA |
-//                           PLL_CLOCK_PTGB |
-                           //PLL_CLOCK_DSP |
-                           PLL_CLOCK_DEBUG_PORT |
-                           PLL_CLOCK_SDS_PORT
-                           , ENABLE);
+    bsp_init();
 
-    HAL_PLL_Init(PLL_P_DIV_1, PLL_Q_DIV_2, 11);
-
-
-
-    GPIO_PowerControl_t PowerParams;
-
-    PowerParams.Group0_DriveControl = DRIVE_4_8MA;
-    PowerParams.Group0_DC_Control = DC_10UA_PULL_UP;
-    PowerParams.Group1_DriveControl = DRIVE_4_8MA;
-    PowerParams.Group1_DC_Control = DC_10UA_PULL_UP;
-    PowerParams.Group2_DriveControl = DRIVE_4_8MA;
-    PowerParams.Group2_DC_Control = DC_10UA_PULL_UP;
-    PowerParams.Group3_DriveControl = DRIVE_4_8MA;
-    PowerParams.Group3_DC_Control = DC_10UA_PULL_UP;
-    PowerParams.EnableAlternateDCs = GPIO_ALTERNATE_DC_PORTA_EN;
-    HAL_GPIO_SetPower(&PowerParams);
-
-    HAL_GPIO_SetPower_GPIOE(GPIO_PIN_2 |GPIO_PIN_3, DRIVE_E_0_8MA, DC_10UA_PULL_UP);
-
-
-    DebugPort.Instance = (SerialPort_TypeDef*)DEBUG_UART_BASE_ADDR;
-    DebugPort.Init.BaudRate = 115200;
-    DebugPort.Init.WordLength = UART_WORDLENGTH_8B;
-    DebugPort.Init.StopBits = UART_STOPBITS_1;
-    DebugPort.Init.Parity = UART_PARITY_NONE;
-    DebugPort.Init.Mode = UART_MODE_TX_RX;
-
-    HAL_UART_Init(&DebugPort);
-
-    SDSPort.Instance = (SerialPort_TypeDef*)SDS_SERIAL_BASE_ADDR;
-    SDSPort.Init.BaudRate = 115200;
-    SDSPort.Init.WordLength = UART_WORDLENGTH_8B;
-    SDSPort.Init.StopBits = UART_STOPBITS_1;
-    SDSPort.Init.Parity = UART_PARITY_NONE;
-    SDSPort.Init.Mode = UART_MODE_TX_RX;
-
-    HAL_UART_Init(&SDSPort);
 
     int n = 0;
-    uint8_t str[64];
 
     uint8_t PowerOn[] = {PM_CONTROL, PMCR_PHONE_ON};
     if(HAL_I2C_Write(CX20524_I2C_ADDR << 1, PowerOn, sizeof(PowerOn)) == HAL_OK)
     {
-        sprintf((char*)str,"Power On! Let's work.\r\n");
+       INFO("Power On! Let's work.\r\n");
 
-        HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
-
+       /* Debug dump of regs */
         uint8_t RdReg[16] ={0x00};
         HAL_I2C_Read(CX20524_I2C_ADDR << 1, RdReg, sizeof(RdReg));
         for(int i=0; i<15; i++)
         {
-            sprintf((char*)str,"REG[%02X]=0x%02X\r\n", i, RdReg[i+1]);
-            HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
+            INFO("REG[%02X]=0x%02X\r\n", i, RdReg[i+1]);
         }
     }
 
-    uint32_t Clock = HAL_GetFreq();
-    sprintf((char*)str,"ARM Core Freq=%d Hz\r\n", Clock);
-    HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
-    HAL_UART_Transmit(&SDSPort, str, strlen((char*)str));
-
-
+    uint32_t Clock = bsp_get_core_freq();
+    INFO("ARM Core Freq=%d Hz\r\n", Clock);
 
     for(;;)
     {
         ++n;
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
+        bsp_blue_led_on();
         delay(500);
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
-        delay(500);
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+        bsp_blue_led_off();
         delay(500);
 
-        sprintf((char*)str,"Test Message DEBUG %d\r\n", n);
-        HAL_UART_Transmit(&DebugPort, str, strlen((char*)str));
+        bsp_green_led_on();
+        delay(500);
+        bsp_green_led_off();
+        delay(500);
 
-        sprintf((char*)str,"Test Message SDS %d\r\n", n);
-        HAL_UART_Transmit(&SDSPort, str, strlen((char*)str));
-
+        bsp_red_led_on();
+        delay(500);
+        bsp_red_led_off();
+        delay(500);
+        INFO("Test Message DEBUG %d\r\n", n);
     }
 
     //return 0;

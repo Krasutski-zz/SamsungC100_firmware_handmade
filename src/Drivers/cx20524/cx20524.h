@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 #define CX20524_I2C_ADDR                    (0x48)
-typedef struct
+typedef enum
 {
 	CX20524_RESULT_OK = 0,
 	CX20524_RESULT_ERROR,
